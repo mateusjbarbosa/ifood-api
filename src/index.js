@@ -9,7 +9,7 @@ app.get('/', (req, res) => {
   res.send('IFood API')
 })
 
-app.post('/restaurante', (req, res) => {
+app.post('/restaurantes', (req, res) => {
   const { nome, endereco } = req.body
 
   const novoRestaurante = {
