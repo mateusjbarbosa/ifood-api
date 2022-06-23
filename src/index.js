@@ -24,6 +24,10 @@ app.post('/restaurantes', (req, res) => {
   res.status(201).json(novoRestaurante)
 })
 
+app.get('/restaurantes', (req, res) => {
+  res.send(restaurantes)
+})
+
 app.listen(3333, () => {
   console.log("API rodando na porta 3333")
 })
