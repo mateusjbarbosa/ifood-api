@@ -5,8 +5,8 @@ app.use(express.json())
 
 const restaurantes = []
 
-app.get('/', (req, res) => {
-  res.send('IFood API')
+app.get('/restaurantes', (req, res) => {
+  res.send(restaurantes)
 })
 
 app.post('/restaurantes', (req, res) => {
@@ -24,10 +24,19 @@ app.post('/restaurantes', (req, res) => {
   res.status(201).json(novoRestaurante)
 })
 
-app.get('/restaurantes', (req, res) => {
-  res.send(restaurantes)
-})
+app.get('/restaurantes/:id/cardapio', (req, res) => {
+  const { id } = req.params
 
+  const restauranteSelecionado = restaurantes.find(restaurante => restaurante.id === Number(id))
+
+  if (!restauranteSelecionado) {
+    return res.status(401).json({
+      erro: "Restaurante não encontrado"
+    })
+  }
+
+  res.send(restauranteSelecionado.cardapio)
+})
 
 app.post('/restaurantes/:id/cardapio', (req, res) => {
   const { id } = req.params
